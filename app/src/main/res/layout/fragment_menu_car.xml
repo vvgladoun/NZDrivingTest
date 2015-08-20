@@ -21,55 +21,113 @@
 
         <!-- material design flat button -->
         <!-- with icon on the left and centered text -->
-        <!-- TODO: add icons on left/start -->
-        <Button
-            android:id="@+id/btn_menu_car_questions"
-            style="?android:attr/borderlessButtonStyle"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:drawableLeft="@drawable/ic_questions"
-            android:text="@string/menu_questions" />
+            android:layout_gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/iv_car_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="10dp"
+                android:src="@drawable/ic_questions"
+                tools:ignore="ContentDescription,RtlHardcoded,RtlSymmetry" />
+
+            <Button
+                android:id="@+id/btn_menu_car_questions"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/menu_questions" />
+        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/separator" />
 
-        <Button
-            android:id="@+id/btn_menu_car_test"
-            style="?android:attr/borderlessButtonStyle"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:drawableLeft="@drawable/ic_test"
-            android:text="@string/menu_test" />
+            android:layout_gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/iv_car_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="10dp"
+                android:src="@drawable/ic_test"
+                tools:ignore="ContentDescription,RtlHardcoded,RtlSymmetry"/>
+
+            <Button
+                android:id="@+id/btn_menu_car_test"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+
+                android:text="@string/menu_test" />
+        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/separator" />
-        <Button
-            android:id="@+id/btn_menu_car_statistics"
-            style="?android:attr/borderlessButtonStyle"
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:drawableLeft="@drawable/ic_statistics"
-            android:text="@string/menu_statistics" />
+            android:layout_gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/iv_car_statistics"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="10dp"
+                android:src="@drawable/ic_statistics"
+                tools:ignore="ContentDescription,RtlHardcoded,RtlSymmetry" />
+
+            <Button
+                android:id="@+id/btn_menu_car_statistics"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/menu_statistics" />
+        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/separator" />
-        <Button
-            android:id="@+id/btn_menu_car_review"
-            style="?android:attr/borderlessButtonStyle"
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:drawableLeft="@drawable/ic_review"
-            android:text="@string/menu_review" />
+            android:layout_gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/iv_car_review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingLeft="10dp"
+                android:src="@drawable/ic_review"
+                tools:ignore="ContentDescription,RtlHardcoded,RtlSymmetry" />
+
+            <Button
+                android:id="@+id/btn_menu_car_review"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/menu_review" />
+        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"

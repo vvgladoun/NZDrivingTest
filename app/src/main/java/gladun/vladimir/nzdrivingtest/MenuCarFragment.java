@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 /**
  * Menu for car driving test
@@ -29,6 +30,17 @@ public class MenuCarFragment extends Fragment implements View.OnClickListener{
         Button btnMenuCarTest = (Button) fragment_view.findViewById(R.id.btn_menu_car_test);
         Button btnMenuCarStatistics = (Button) fragment_view.findViewById(R.id.btn_menu_car_statistics);
         Button btnMenuCarReview = (Button) fragment_view.findViewById(R.id.btn_menu_car_review);
+
+        // set icon color
+        int color = getResources().getColor(R.color.icon_grey);
+        ImageView ivQuestions = (ImageView)fragment_view.findViewById(R.id.iv_car_question);
+        ImageView ivTest = (ImageView)fragment_view.findViewById(R.id.iv_car_test);
+        ImageView ivStat = (ImageView)fragment_view.findViewById(R.id.iv_car_statistics);
+        ImageView ivReview = (ImageView)fragment_view.findViewById(R.id.iv_car_review);
+        ivQuestions.setColorFilter(color);
+        ivTest.setColorFilter(color);
+        ivStat.setColorFilter(color);
+        ivReview.setColorFilter(color);
 
         // set implemented method onClick as the onClickListener
         btnMenuCarQuestions.setOnClickListener(this);

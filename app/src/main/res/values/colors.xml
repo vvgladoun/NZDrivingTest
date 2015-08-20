@@ -22,4 +22,6 @@
     <color name="text_red">#ff4e3d</color>
     <color name="text_orange">#FF8F00</color>
     <color name="text_green">#6fdf8e</color>
+    <!-- main menu grey color -->
+    <color name="icon_grey">#929493</color>
 </resources>

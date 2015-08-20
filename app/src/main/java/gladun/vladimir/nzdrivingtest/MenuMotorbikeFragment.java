@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 /**
  * Menu for motorbike driving test
@@ -34,6 +35,17 @@ public class MenuMotorbikeFragment extends Fragment implements View.OnClickListe
         btnMenuTest.setOnClickListener(this);
         btnMenuStatistics.setOnClickListener(this);
         btnMenuReview.setOnClickListener(this);
+
+        // set icon color
+        int color = getResources().getColor(R.color.icon_grey);
+        ImageView ivQuestions = (ImageView)fragment_view.findViewById(R.id.iv_mb_question);
+        ImageView ivTest = (ImageView)fragment_view.findViewById(R.id.iv_mb_test);
+        ImageView ivStat = (ImageView)fragment_view.findViewById(R.id.iv_mb_statistics);
+        ImageView ivReview = (ImageView)fragment_view.findViewById(R.id.iv_mb_review);
+        ivQuestions.setColorFilter(color);
+        ivTest.setColorFilter(color);
+        ivStat.setColorFilter(color);
+        ivReview.setColorFilter(color);
 
         return fragment_view;
     }

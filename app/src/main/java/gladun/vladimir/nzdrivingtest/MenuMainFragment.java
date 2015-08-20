@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 /**
  * Main menu
@@ -29,6 +30,13 @@ public class MenuMainFragment extends Fragment implements View.OnClickListener {
         // set implemented method onClick as the onClickListener
         btnMainCar.setOnClickListener(this);
         btnMainMotorbike.setOnClickListener(this);
+
+        // set icon color
+        int color = getResources().getColor(R.color.icon_grey);
+        ImageView ivCar = (ImageView)fragment_view.findViewById(R.id.iv_main_car);
+        ImageView ivMb = (ImageView)fragment_view.findViewById(R.id.iv_main_mb);
+        ivCar.setColorFilter(color);
+        ivMb.setColorFilter(color);
 
         return fragment_view;
     }

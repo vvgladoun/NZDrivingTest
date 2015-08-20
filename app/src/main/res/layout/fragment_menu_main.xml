@@ -23,11 +23,12 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/iv_main_car"
                 android:layout_width="50dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_centerVertical="true"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_car_grey"
                 tools:ignore="ContentDescription" />
@@ -55,11 +56,12 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/iv_main_mb"
                 android:layout_width="40dp"
                 android:layout_height="25dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
+                android:layout_centerVertical="true"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_bike_grey"
                 tools:ignore="ContentDescription" />

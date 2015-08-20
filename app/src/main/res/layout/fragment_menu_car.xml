@@ -28,6 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:drawableLeft="@drawable/ic_questions"
             android:text="@string/menu_questions" />
 
         <View
@@ -41,6 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:drawableLeft="@drawable/ic_test"
             android:text="@string/menu_test" />
 
         <View
@@ -53,6 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:drawableLeft="@drawable/ic_statistics"
             android:text="@string/menu_statistics" />
 
         <View
@@ -65,6 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:drawableLeft="@drawable/ic_review"
             android:text="@string/menu_review" />
 
         <View

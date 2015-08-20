@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">NZ Driving Test</string>
+
+    <string name="card_bike_header">Motorbike Test</string>
+    <string name="card_car_header">Car Test</string>
+    <string name="main_menu_img_description">NZ Driving Test App</string>
+    <string name="main_menu_car_test">Car Test</string>
+    <string name="main_menu_motorbike_test">Motorbike Test</string>
+    <string name="menu_questions">All Questions</string>
+    <string name="menu_test">Test Simulator</string>
+    <string name="menu_statistics">Statistics</string>
+    <string name="menu_review">Review Mistakes</string>
+
+    <!-- strings in exit dialog -->
+    <string name="exit_ok">OK</string>
+    <string name="exit_cancel">Cancel</string>
+    <string name="exit_confirm">Do you really want to quit test mode?</string>
+    <!-- strings in test result dialog -->
+    <string name="result_try_again">Try again</string>
+    <string name="result_quit_test">Quit test</string>
+    <string name="result_status_passed">TEST PASSED</string>
+    <string name="result_status_failed">TEST FAILED</string>
+    <!-- strings in about dialog -->
+    <string name="about_title">ABOUT</string>
+    <string name="about_text">
+        New Zealand Driving Test App
+        \nVersion 1.3
+        \nDeveloped by:
+        \nVladimir Gladun
+        \nWebsite:
+        \nhttp://nzdrivingtest.co.nf/
+        \nEmail:
+        \nvvgladoun@gmail.com
+    </string>
+
+
+    <!-- strings in settings -->
+    <string name="action_about">About</string>
+    <string name="action_settings">Settings</string>
+
+</resources>

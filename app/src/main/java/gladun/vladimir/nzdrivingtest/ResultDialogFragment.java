@@ -36,6 +36,7 @@ public class ResultDialogFragment extends DialogFragment implements View.OnClick
 
     public static ResultDialogFragment newInstance(boolean passed, int mistakes,
                                                    int questions, long timeSpent) {
+        //
         Bundle args = new Bundle();
         args.putInt(EXTRA_MISTAKES, mistakes);
         args.putInt(EXTRA_QUESTIONS, questions);

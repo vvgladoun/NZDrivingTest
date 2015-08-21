@@ -17,9 +17,10 @@
     <string name="exit_confirm">Do you really want to quit test mode?</string>
     <!-- strings in test result dialog -->
     <string name="result_try_again">Try again</string>
-    <string name="result_quit_test">Quit test</string>
+    <string name="result_quit_test">Quit</string>
     <string name="result_status_passed">TEST PASSED</string>
     <string name="result_status_failed">TEST FAILED</string>
+    <string name="result_status_statistics">STATISTICS</string>
     <!-- strings test result dialog -->
     <string name="answer_correct">CORRECT!</string>
     <string name="answer_wrong">INCORRECT!</string>

@@ -19,11 +19,10 @@ import java.util.ArrayList;
  *
  * @author vvgladoun@gmail.com
  */
-public class QuestionActivity extends AppCompatActivity implements QuestionCallbacks{
+public class ReviewActivity extends AppCompatActivity implements QuestionCallbacks{
 
     // to pass arguments on first create
     public static final String EXTRA_TEST_TYPE = "TEST_TYPE";
-    public static final String EXTRA_CATEGORY = "CATEGORY";
     // to save current state
     public static final String EXTRA_CURRENT_QUESTION = "CURRENT_QUESTION";
     public static final String EXTRA_QUESTIONS_LIST = "QUESTIONS_LIST";
@@ -45,8 +44,6 @@ public class QuestionActivity extends AppCompatActivity implements QuestionCallb
     private android.os.Handler mTimerHandler;
     // count of errors
     private int mErrorCount;
-    // id of selected category
-    private int mCategory;
     // number of the current question
     private int mCurrentQuestion;
     // Array of questions - create it on first create (if fragment == null)
@@ -75,10 +72,8 @@ public class QuestionActivity extends AppCompatActivity implements QuestionCallb
         // get max number of errors from extras
         Bundle extras = this.getIntent().getExtras();
         if (extras != null) {
-            mCategory = extras.getInt(EXTRA_CATEGORY);
             mTestType = extras.getInt(EXTRA_TEST_TYPE);
         } else {
-            mCategory = 0;
             mTestType = Question.CAR_TEST;
         }
 
@@ -86,7 +81,6 @@ public class QuestionActivity extends AppCompatActivity implements QuestionCallb
         if (savedInstanceState != null){
             //get from saved state
             mCurrentQuestion = savedInstanceState.getInt(EXTRA_CURRENT_QUESTION);
-            mCategory = savedInstanceState.getInt(EXTRA_CATEGORY);
             mQuestions = savedInstanceState.getParcelableArrayList(EXTRA_QUESTIONS_LIST);
             mMilliseconds = savedInstanceState.getLong(EXTRA_TIME_SPENT);
             mQuestions = savedInstanceState.getParcelableArrayList(EXTRA_QUESTIONS_LIST);
@@ -107,7 +101,6 @@ public class QuestionActivity extends AppCompatActivity implements QuestionCallb
     protected void onSaveInstanceState(Bundle outState) {
         // number of the current question and category
         outState.putInt(EXTRA_CURRENT_QUESTION, mCurrentQuestion);
-        outState.putInt(EXTRA_CATEGORY, mCategory);
         // spent time
         outState.putLong(EXTRA_TIME_SPENT, mMilliseconds);
         // add array of questions (with possible answers)
@@ -236,11 +229,8 @@ public class QuestionActivity extends AppCompatActivity implements QuestionCallb
 
         @Override
         protected Void doInBackground(Void... arg0) {
-            if (mCategory == 0) {
-                mQuestions = QuestionDAO.getAllQuestions(mContext, mTestType);
-            } else {
-                mQuestions = QuestionDAO.getQuestionsByCategory(mContext, mTestType, mCategory);
-            }
+            mQuestions = QuestionDAO.getFailedQuestions(mContext, mTestType);
+
             return null;
         }
 

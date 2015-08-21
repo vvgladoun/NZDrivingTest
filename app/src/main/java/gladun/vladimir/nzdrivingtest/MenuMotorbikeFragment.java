@@ -61,7 +61,6 @@ public class MenuMotorbikeFragment extends Fragment implements View.OnClickListe
                 break;
             case R.id.btn_menu_mb_test:
                 //start exam simulator
-                //start exam simulator
                 Intent testActivity = new Intent(v.getContext(), TestActivity.class);
                 testActivity.putExtra(TestActivity.EXTRA_MAX_ERRORS, 3);
                 testActivity.putExtra(TestActivity.EXTRA_TEST_TYPE, Question.MOTORBIKE_TEST);
@@ -76,7 +75,9 @@ public class MenuMotorbikeFragment extends Fragment implements View.OnClickListe
             case R.id.btn_menu_mb_review:
                 // start question activity with array list of questions
                 // from error table
-                //TODO: add intent question activity (with error option in extras)
+                Intent reviewActivity = new Intent(v.getContext(), ReviewActivity.class);
+                reviewActivity.putExtra(TestActivity.EXTRA_TEST_TYPE, Question.MOTORBIKE_TEST);
+                v.getContext().startActivity(reviewActivity);
                 break;
         }
     }

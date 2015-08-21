@@ -71,9 +71,12 @@ public class CategoryListFragment extends ListFragment{
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        //TODO: create new activity with selected category
-
-
+        // create new question activity with selected category
+        Intent questionActivity = new Intent(v.getContext(), QuestionActivity.class);
+        questionActivity.putExtra(QuestionActivity.EXTRA_TEST_TYPE, mTestType);
+        int categoryId = ((Category)mCategoryAdapter.getItem(position)).getId();
+        questionActivity.putExtra(QuestionActivity.EXTRA_CATEGORY, categoryId);
+        v.getContext().startActivity(questionActivity);
     }
 
     /**

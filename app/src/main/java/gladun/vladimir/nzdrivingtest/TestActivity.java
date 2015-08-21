@@ -7,7 +7,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.app.DialogFragment;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -30,12 +29,14 @@ public class TestActivity extends AppCompatActivity implements QuestionCallbacks
     private static final long TEST_DURATION = 1800000;
     private static final int NUMBER_OF_QUESTIONS = 35;
     private static final int DEFAULT_MAX_ERRORS = 3;
+
+    // to pass arguments on first create
     public static final String EXTRA_MAX_ERRORS = "MAX_ERRORS";
+    public static final String EXTRA_TEST_TYPE = "TEST_TYPE";
     // to save current state
     public static final String EXTRA_TIME_LEFT = "TIME_LEFT";
     public static final String EXTRA_CURRENT_QUESTION = "CURRENT_QUESTION";
     public static final String EXTRA_ERROR_COUNT = "ERROR_COUNT";
-    public static final String EXTRA_TEST_TYPE = "TEST_TYPE";
     public static final String EXTRA_QUESTIONS_LIST = "QUESTIONS_LIST";
 
     private int mMaxErrors;
@@ -56,7 +57,7 @@ public class TestActivity extends AppCompatActivity implements QuestionCallbacks
     // - count of errors
     private int mErrorCount;
 
-    // create it on first create (if fragment == null)
+    // Array of questions - create it on first create (if fragment == null)
     // and then store in savedInstanceState as parcelable array list
     private ArrayList<Question> mQuestions;
 
@@ -131,11 +132,14 @@ public class TestActivity extends AppCompatActivity implements QuestionCallbacks
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //cancel async task to avoid crash
+        //cancel all threads to avoid crash
+        // or memory leaking
         if (mDownloadTask != null) {
             mDownloadTask.cancel(true);
         }
-
+        if (mCountdownTimer != null) {
+            mCountdownTimer.cancel();
+        }
     }
 
     /**
@@ -149,7 +153,6 @@ public class TestActivity extends AppCompatActivity implements QuestionCallbacks
 
     /**
      * Get activities' fragment manager
-     * set back stack changer listener
      * and create initial fragment if needed
      */
     private void setFragment(){
@@ -267,6 +270,20 @@ public class TestActivity extends AppCompatActivity implements QuestionCallbacks
     }
 
     /**
+     * Show test results dialog
+     */
+    private void finishTest(){
+        // stop timer
+        mCountdownTimer.cancel();
+        // get errors/ unanswered questions
+        int mistaken = mErrorCount + NUMBER_OF_QUESTIONS - mCurrentQuestion;
+        //show result dialog
+        DialogFragment resultDialog = ResultDialogFragment
+                .newInstance((mistaken <= mMaxErrors), mistaken, NUMBER_OF_QUESTIONS, (TEST_DURATION - mTimeLeft));
+        resultDialog.show(getFragmentManager(), "RESULT");
+    }
+
+    /**
      * Start next question from the fragment
      */
     @Override
@@ -288,20 +305,6 @@ public class TestActivity extends AppCompatActivity implements QuestionCallbacks
             // if test was finished
             finishTest();
         }
-    }
-
-    /**
-     * Show test results dialog
-     */
-    private void finishTest(){
-        // stop timer
-        mCountdownTimer.cancel();
-        // get errors/ unanswered questions
-        int mistaken = mErrorCount + NUMBER_OF_QUESTIONS - mCurrentQuestion;
-        //show result dialog
-        DialogFragment resultDialog = ResultDialogFragment
-                .newInstance((mistaken <= mMaxErrors), mistaken, NUMBER_OF_QUESTIONS, (TEST_DURATION - mTimeLeft));
-        resultDialog.show(getFragmentManager(), "RESULT");
     }
 
     @Override

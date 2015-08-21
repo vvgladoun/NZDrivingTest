@@ -74,8 +74,10 @@ public class MenuCarFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.btn_menu_car_review:
                 // start question activity with array list of questions
-                // from error table
-                //TODO: add intent question activity (with error option in extras)
+                // from mistake table
+                Intent reviewActivity = new Intent(v.getContext(), ReviewActivity.class);
+                reviewActivity.putExtra(TestActivity.EXTRA_TEST_TYPE, Question.CAR_TEST);
+                v.getContext().startActivity(reviewActivity);
                 break;
         }
     }

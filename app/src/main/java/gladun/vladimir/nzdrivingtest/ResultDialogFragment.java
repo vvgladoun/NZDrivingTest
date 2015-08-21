@@ -80,18 +80,29 @@ public class ResultDialogFragment extends DialogFragment implements View.OnClick
         //set status
         ImageView statusIcon = (ImageView)dialog.findViewById(R.id.test_result_icon);
         TextView statusText = (TextView)dialog.findViewById(R.id.test_result_status);
-        if (mPassed) {
-            //set passed
-            statusIcon.setImageResource(R.drawable.ic_passed_large);
-            int color = getResources().getColor(R.color.text_green);
+        if (mTimeSpent == 0) {
+            // practice mode (not for test simulation)
+            statusIcon.setImageResource(R.drawable.ic_statistics);
+            int color = getResources().getColor(R.color.material_yellow_600);
             statusIcon.setColorFilter(color);
-            statusText.setText(getResources().getText(R.string.result_status_passed));
+            statusText.setText(getResources().getText(R.string.result_status_statistics));
+            dialog.findViewById(R.id.test_result_time).setVisibility(View.GONE);
         } else {
-            //set failed
-            statusIcon.setImageResource(R.drawable.ic_failed_large);
-            int color = getResources().getColor(R.color.text_red);
-            statusIcon.setColorFilter(color);
-            statusText.setText(getResources().getText(R.string.result_status_failed));
+            if (mPassed) {
+                //set passed
+                statusIcon.setImageResource(R.drawable.ic_passed_large);
+                int color = getResources().getColor(R.color.text_green);
+                statusIcon.setColorFilter(color);
+                statusText.setText(getResources().getText(R.string.result_status_passed));
+            } else {
+                //set failed
+                statusIcon.setImageResource(R.drawable.ic_failed_large);
+                int color = getResources().getColor(R.color.text_red);
+                statusIcon.setColorFilter(color);
+                statusText.setText(getResources().getText(R.string.result_status_failed));
+            }
+            TextView tvTime = (TextView)dialog.findViewById(R.id.test_result_time);
+            tvTime.setText("Time: " + FormatHelper.getTimeString(mTimeSpent));
         }
         // set details
         TextView tvScore = (TextView)dialog.findViewById(R.id.test_result_score);
@@ -100,9 +111,6 @@ public class ResultDialogFragment extends DialogFragment implements View.OnClick
         tvCorrect.setText("Correct answers: " + (mQuestions - mMistakes));
         TextView tvWrong = (TextView)dialog.findViewById(R.id.test_result_wrong);
         tvWrong.setText("Wrong answers: " + mMistakes);
-        TextView tvTime = (TextView)dialog.findViewById(R.id.test_result_time);
-        tvTime.setText("Time: " + FormatHelper.getTimeString(mTimeSpent));
-
 
         //find buttons
         Button btnExit = (Button)dialog.findViewById(R.id.test_result_exit_btn);

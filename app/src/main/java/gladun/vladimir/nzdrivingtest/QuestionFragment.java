@@ -1,5 +1,6 @@
 package gladun.vladimir.nzdrivingtest;
 
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -24,7 +25,6 @@ import java.util.ArrayList;
  */
 public class QuestionFragment extends Fragment {
 
-    public static final String EXTRA_QUESTION_NUMBER = "QUESTION_NUMBER";
     public static final String EXTRA_SHOW_ANSWER = "SHOW_NUMBER";
     private Question mQuestion;
     private boolean mShowAnswer;
@@ -37,13 +37,11 @@ public class QuestionFragment extends Fragment {
     /**
      * Create new instance of the fragment with defined extra
      *
-     * @param questionNumber - index of the current question
      * @param showAnswer - if true, show answer before next question
      * @return built fragment
      */
-    public static QuestionFragment newInstance(int questionNumber, boolean showAnswer) {
+    public static QuestionFragment newInstance(boolean showAnswer) {
         Bundle args = new Bundle();
-        args.putInt(EXTRA_QUESTION_NUMBER, questionNumber);
         args.putBoolean(EXTRA_SHOW_ANSWER, showAnswer);
         QuestionFragment fragment = new QuestionFragment();
         fragment.setArguments(args);
@@ -92,12 +90,15 @@ public class QuestionFragment extends Fragment {
                     // check if answers were correct
                     boolean isCorrect = Answer.checkAnswers(mQuestion.getAnswers(), mAnswers);
                     if (!isCorrect) {
-                        //save the mistake for review
+                        //if not - save the mistake for review
                         (new SaveMistakenQuestion()).execute();
                     }
                     // if needed, show right answer
                     if (mShowAnswer) {
-                        //TODO: show dialog window with result
+                        //show answer dialog
+                        DialogFragment answerDialog = AnswerDialogFragment
+                                .newInstance(isCorrect, mQuestion.getExplanation(), mQuestion.getExplanationImage());
+                        answerDialog.show(getFragmentManager(), "ANSWER");
                     }
                     // put fragment of the next question (or results)
                     qa.startNextQuestion(isCorrect);

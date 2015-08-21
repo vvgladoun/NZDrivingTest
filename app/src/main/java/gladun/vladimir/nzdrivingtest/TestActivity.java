@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.app.DialogFragment;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -55,9 +56,8 @@ public class TestActivity extends AppCompatActivity implements QuestionCallbacks
     // - count of errors
     private int mErrorCount;
 
-    //TODO: add array of questions and async task QuestionLoader
     // create it on first create (if fragment == null)
-    // and then store in savedInstanceState
+    // and then store in savedInstanceState as parcelable array list
     private ArrayList<Question> mQuestions;
 
 
@@ -97,6 +97,7 @@ public class TestActivity extends AppCompatActivity implements QuestionCallbacks
             mTimeLeft = savedInstanceState.getLong(EXTRA_TIME_LEFT);
             mCurrentQuestion = savedInstanceState.getInt(EXTRA_CURRENT_QUESTION);
             mErrorCount = savedInstanceState.getInt(EXTRA_ERROR_COUNT);
+            mQuestions = savedInstanceState.getParcelableArrayList(EXTRA_QUESTIONS_LIST);
         }
 
         mContext = this;
@@ -196,11 +197,12 @@ public class TestActivity extends AppCompatActivity implements QuestionCallbacks
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        //save all variables to a bundle
         outState.putLong(EXTRA_TIME_LEFT, mTimeLeft);
         outState.putInt(EXTRA_CURRENT_QUESTION, mCurrentQuestion);
         outState.putInt(EXTRA_ERROR_COUNT, mErrorCount);
-        //TODO implement parcelable for Questions (and Answers)
-        //outState.putParcelableArrayList(EXTRA_QUESTIONS_LIST, mQuestions);
+        //add array of questions (with possible answers)
+        outState.putParcelableArrayList(EXTRA_QUESTIONS_LIST, mQuestions);
         super.onSaveInstanceState(outState);
     }
 
@@ -280,7 +282,7 @@ public class TestActivity extends AppCompatActivity implements QuestionCallbacks
             mCurrentQuestion++;
             setQuestionCounter();
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragmentContainerQuestion, QuestionFragment.newInstance(mCurrentQuestion, false));
+            transaction.replace(R.id.fragmentContainerQuestion, QuestionFragment.newInstance(false));
             transaction.commit();
         } else {
             // if test was finished
@@ -342,7 +344,7 @@ public class TestActivity extends AppCompatActivity implements QuestionCallbacks
             mProgressBar.setVisibility(View.GONE);
 
             // create first question's fragment
-            QuestionFragment questionFragment = QuestionFragment.newInstance(mCurrentQuestion, false);
+            QuestionFragment questionFragment = QuestionFragment.newInstance(false);
             mFragmentManager.beginTransaction()
                     .add(R.id.fragmentContainerQuestion, questionFragment)
                     .commit();

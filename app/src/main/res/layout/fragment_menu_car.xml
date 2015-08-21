@@ -28,10 +28,11 @@
 
             <ImageView
                 android:id="@+id/iv_car_question"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_centerVertical="true"
                 android:paddingLeft="10dp"
+                android:scaleType="fitCenter"
                 android:src="@drawable/ic_questions"
                 tools:ignore="ContentDescription,RtlHardcoded,RtlSymmetry" />
 
@@ -56,12 +57,13 @@
 
             <ImageView
                 android:id="@+id/iv_car_test"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_centerVertical="true"
                 android:paddingLeft="10dp"
+                android:scaleType="fitCenter"
                 android:src="@drawable/ic_test"
-                tools:ignore="ContentDescription,RtlHardcoded,RtlSymmetry"/>
+                tools:ignore="ContentDescription,RtlHardcoded,RtlSymmetry" />
 
             <Button
                 android:id="@+id/btn_menu_car_test"
@@ -85,10 +87,11 @@
 
             <ImageView
                 android:id="@+id/iv_car_statistics"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_centerVertical="true"
                 android:paddingLeft="10dp"
+                android:scaleType="fitCenter"
                 android:src="@drawable/ic_statistics"
                 tools:ignore="ContentDescription,RtlHardcoded,RtlSymmetry" />
 
@@ -113,10 +116,11 @@
 
             <ImageView
                 android:id="@+id/iv_car_review"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_centerVertical="true"
                 android:paddingLeft="10dp"
+                android:scaleType="fitCenter"
                 android:src="@drawable/ic_review"
                 tools:ignore="ContentDescription,RtlHardcoded,RtlSymmetry" />
 

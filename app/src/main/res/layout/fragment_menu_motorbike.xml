@@ -28,8 +28,9 @@
 
             <ImageView
                 android:id="@+id/iv_mb_question"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:scaleType="fitCenter"
                 android:layout_centerVertical="true"
                 android:paddingLeft="10dp"
                 android:src="@drawable/ic_questions"
@@ -57,8 +58,9 @@
 
             <ImageView
                 android:id="@+id/iv_mb_test"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:scaleType="fitCenter"
                 android:layout_centerVertical="true"
                 android:paddingLeft="10dp"
                 android:src="@drawable/ic_test"
@@ -85,8 +87,9 @@
 
             <ImageView
                 android:id="@+id/iv_mb_statistics"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:scaleType="fitCenter"
                 android:layout_centerVertical="true"
                 android:paddingLeft="10dp"
                 android:src="@drawable/ic_statistics"
@@ -113,8 +116,9 @@
 
             <ImageView
                 android:id="@+id/iv_mb_review"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:scaleType="fitCenter"
                 android:layout_centerVertical="true"
                 android:paddingLeft="10dp"
                 android:src="@drawable/ic_review"

@@ -2,6 +2,7 @@ package gladun.vladimir.nzdrivingtest;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -60,9 +61,11 @@ public class MenuMotorbikeFragment extends Fragment implements View.OnClickListe
                 break;
             case R.id.btn_menu_mb_test:
                 //start exam simulator
-                //TODO: uncomment after exam activity is ready
-                //Intent carMenu = new Intent(v.getContext(), ExamActivity.class);
-                //v.getContext().startActivity(carMenu);
+                //start exam simulator
+                Intent testActivity = new Intent(v.getContext(), TestActivity.class);
+                testActivity.putExtra(TestActivity.EXTRA_MAX_ERRORS, 3);
+                testActivity.putExtra(TestActivity.EXTRA_TEST_TYPE, Question.MOTORBIKE_TEST);
+                v.getContext().startActivity(testActivity);
                 break;
             case R.id.btn_menu_mb_statistics:
                 // show statistics by groups (car/bike):

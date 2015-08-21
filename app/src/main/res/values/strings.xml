@@ -20,6 +20,9 @@
     <string name="result_quit_test">Quit test</string>
     <string name="result_status_passed">TEST PASSED</string>
     <string name="result_status_failed">TEST FAILED</string>
+    <!-- strings test result dialog -->
+    <string name="answer_correct">CORRECT!</string>
+    <string name="answer_wrong">INCORRECT!</string>
     <!-- strings in about dialog -->
     <string name="about_title">ABOUT</string>
     <string name="about_text">

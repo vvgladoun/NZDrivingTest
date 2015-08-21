@@ -1,5 +1,8 @@
 package gladun.vladimir.nzdrivingtest;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
 /**
@@ -7,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author Vladimir Gladun vvgladoun@gmail.com
  */
-public class Question {
+public class Question implements Parcelable{
 
     private int id;
     private String questionText;
@@ -51,6 +54,30 @@ public class Question {
         this.explanation = explanation;
         this.explanationImage = explanationImage;
     }
+
+    protected Question(Parcel in) {
+        id = in.readInt();
+        questionText = in.readString();
+        categoryId = in.readInt();
+        answers = in.createTypedArrayList(Answer.CREATOR);
+        imageName = in.readString();
+        testType = in.readInt();
+        explanation = in.readString();
+        explanationImage = in.readString();
+        multipleChoice = (in.readByte() == 1);
+    }
+
+    public static final Creator<Question> CREATOR = new Creator<Question>() {
+        @Override
+        public Question createFromParcel(Parcel in) {
+            return new Question(in);
+        }
+
+        @Override
+        public Question[] newArray(int size) {
+            return new Question[size];
+        }
+    };
 
     /**
      *
@@ -124,5 +151,26 @@ public class Question {
     public String getExplanationImage() {
         return explanationImage;
     }
+
+
+    //PARCELABLE implementation
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(questionText);
+        dest.writeInt(categoryId);
+        dest.writeTypedList(answers);
+        dest.writeString(imageName);
+        dest.writeInt(testType);
+        dest.writeString(explanation);
+        dest.writeString(explanationImage);
+        dest.writeByte((byte)(multipleChoice ? 1 : 0));
+    }
+
 
 }

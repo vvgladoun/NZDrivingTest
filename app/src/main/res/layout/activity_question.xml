@@ -42,8 +42,7 @@
     <ScrollView
         android:id="@+id/questionContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        android:layout_height="match_parent">
 
         <!-- other parts will be added as a fragments -->
         <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"

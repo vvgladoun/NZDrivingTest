@@ -22,30 +22,28 @@ public class MenuMotorbikeFragment extends Fragment implements View.OnClickListe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        // get main menu fragment layout
+        getActivity().setTitle("Motorbike test");
+
+        // get motorbike menu fragment layout
         View fragment_view = inflater.inflate(R.layout.fragment_menu_motorbike, container, false);
 
         // get buttons from activity's layout
         Button btnMenuQuestions = (Button) fragment_view.findViewById(R.id.btn_menu_mb_questions);
         Button btnMenuTest = (Button) fragment_view.findViewById(R.id.btn_menu_mb_test);
-        Button btnMenuStatistics = (Button) fragment_view.findViewById(R.id.btn_menu_mb_statistics);
         Button btnMenuReview = (Button) fragment_view.findViewById(R.id.btn_menu_mb_review);
 
         // set implemented method onClick as the onClickListener
         btnMenuQuestions.setOnClickListener(this);
         btnMenuTest.setOnClickListener(this);
-        btnMenuStatistics.setOnClickListener(this);
         btnMenuReview.setOnClickListener(this);
 
         // set icon color
         int color = getResources().getColor(R.color.icon_grey);
         ImageView ivQuestions = (ImageView)fragment_view.findViewById(R.id.iv_mb_question);
         ImageView ivTest = (ImageView)fragment_view.findViewById(R.id.iv_mb_test);
-        ImageView ivStat = (ImageView)fragment_view.findViewById(R.id.iv_mb_statistics);
         ImageView ivReview = (ImageView)fragment_view.findViewById(R.id.iv_mb_review);
         ivQuestions.setColorFilter(color);
         ivTest.setColorFilter(color);
-        ivStat.setColorFilter(color);
         ivReview.setColorFilter(color);
 
         return fragment_view;
@@ -65,12 +63,6 @@ public class MenuMotorbikeFragment extends Fragment implements View.OnClickListe
                 testActivity.putExtra(TestActivity.EXTRA_MAX_ERRORS, 3);
                 testActivity.putExtra(TestActivity.EXTRA_TEST_TYPE, Question.MOTORBIKE_TEST);
                 v.getContext().startActivity(testActivity);
-                break;
-            case R.id.btn_menu_mb_statistics:
-                // show statistics by groups (car/bike):
-                //  bar for finished tests
-                //  bar for answered questions
-
                 break;
             case R.id.btn_menu_mb_review:
                 // start question activity with array list of questions

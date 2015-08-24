@@ -1,6 +1,7 @@
 package gladun.vladimir.nzdrivingtest;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.app.DialogFragment;
@@ -119,5 +120,14 @@ public class AnswerDialogFragment extends DialogFragment{
         title.setVisibility(View.GONE);
 
         return dialog;
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        if (getActivity() instanceof QuestionCallbacks) {
+            QuestionCallbacks qa = (QuestionCallbacks) getActivity();
+            qa.startNextQuestion(mCorrect);
+        }
     }
 }

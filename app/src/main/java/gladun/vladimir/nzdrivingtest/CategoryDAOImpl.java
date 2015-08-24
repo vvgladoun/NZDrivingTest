@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author Vladimir Gladun vvgladoun@gmail.com
  */
-public class CategoryDAO {
+public class CategoryDAOImpl {
 
     /**
      * get all categories for test type

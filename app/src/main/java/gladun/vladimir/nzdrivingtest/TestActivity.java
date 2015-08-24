@@ -3,6 +3,7 @@ package gladun.vladimir.nzdrivingtest;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -74,6 +75,8 @@ public class TestActivity extends AppCompatActivity implements QuestionCallbacks
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
+        setTitle("Test simulator");
 
         mQuestionCounter = (TextView)findViewById(R.id.question_counter);
         mTimerText = (TextView)findViewById(R.id.timer_text);
@@ -198,6 +201,51 @@ public class TestActivity extends AppCompatActivity implements QuestionCallbacks
         mCountdownTimer.start();
     }
 
+    /**
+     * Update statistics stored in internal storage
+     */
+    private void updateStatistics(){
+        Context context = this;
+        int fileId;
+        // get file key (depends on test type)
+        switch (mTestType) {
+            case Question.CAR_TEST:
+                fileId = R.string.file_key_statistics_car;
+                break;
+            case Question.MOTORBIKE_TEST:
+                fileId = R.string.file_key_statistics_mb;
+                break;
+            default:
+                fileId = R.string.file_key_statistics_car;
+        }
+        // get shared preferences file by file key
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                getString(fileId), Context.MODE_PRIVATE);
+
+        // get previous statistics
+        int questions = sharedPref.getInt(getString(R.string.saved_questions_count), 0);
+        int mistakes = sharedPref.getInt(getString(R.string.saved_mistakes_count), 0);
+        int score = sharedPref.getInt(getString(R.string.saved_average_score), 0);
+        long avgMilliseconds = sharedPref.getLong(getString(R.string.saved_average_time), 0);
+
+        // update statistics
+        avgMilliseconds =
+                ((avgMilliseconds * questions) + ((TEST_DURATION - mTimeLeft) * mCurrentQuestion)
+                        / (questions + mCurrentQuestion));
+        questions = questions + mCurrentQuestion;
+        mistakes = mistakes + mErrorCount;
+        if (questions > 0)
+            score = (questions - mistakes) / questions;
+
+        // save updated statistics
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt(getString(R.string.saved_questions_count), questions);
+        editor.putInt(getString(R.string.saved_mistakes_count), mistakes);
+        editor.putInt(getString(R.string.saved_average_score), score);
+        editor.putLong(getString(R.string.saved_average_time), avgMilliseconds);
+        editor.apply();
+    }
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         //save all variables to a bundle
@@ -275,6 +323,7 @@ public class TestActivity extends AppCompatActivity implements QuestionCallbacks
     private void finishTest(){
         // stop timer
         mCountdownTimer.cancel();
+        updateStatistics();
         // get errors/ unanswered questions
         int mistaken = mErrorCount + NUMBER_OF_QUESTIONS - mCurrentQuestion;
         //show result dialog
@@ -336,7 +385,7 @@ public class TestActivity extends AppCompatActivity implements QuestionCallbacks
 
         @Override
         protected Void doInBackground(Void... arg0) {
-            mQuestions = QuestionDAO.getShuffledQuestions(mContext, mTestType, NUMBER_OF_QUESTIONS);
+            mQuestions = QuestionDAOImpl.getShuffledQuestions(mContext, mTestType, NUMBER_OF_QUESTIONS);
             return null;
         }
 

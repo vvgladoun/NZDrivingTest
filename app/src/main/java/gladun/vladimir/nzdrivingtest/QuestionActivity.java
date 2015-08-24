@@ -65,6 +65,8 @@ public class QuestionActivity extends AppCompatActivity implements QuestionCallb
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        setTitle("Practice");
+
         // hide status row from activity
         mQuestionCounter = (TextView)findViewById(R.id.question_counter);
         mTimerText = (TextView)findViewById(R.id.timer_text);
@@ -237,9 +239,9 @@ public class QuestionActivity extends AppCompatActivity implements QuestionCallb
         @Override
         protected Void doInBackground(Void... arg0) {
             if (mCategory == 0) {
-                mQuestions = QuestionDAO.getAllQuestions(mContext, mTestType);
+                mQuestions = QuestionDAOImpl.getAllQuestions(mContext, mTestType);
             } else {
-                mQuestions = QuestionDAO.getQuestionsByCategory(mContext, mTestType, mCategory);
+                mQuestions = QuestionDAOImpl.getQuestionsByCategory(mContext, mTestType, mCategory);
             }
             return null;
         }
@@ -289,12 +291,6 @@ public class QuestionActivity extends AppCompatActivity implements QuestionCallb
     }
     @Override
     public void RestartActivity() {
-        mFragmentManager = getFragmentManager();
-        QuestionFragment questionFragment = (QuestionFragment)mFragmentManager
-                .findFragmentById(R.id.fragmentContainerQuestion);
-        // remove fragment
-        FragmentTransaction transaction = mFragmentManager.beginTransaction();
-        transaction.remove(questionFragment).commit();
         // initialize default values
         setDefaultValues();
         // re-create activity

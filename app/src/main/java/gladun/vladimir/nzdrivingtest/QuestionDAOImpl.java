@@ -13,7 +13,7 @@ import java.util.Collections;
  *
  * @author Vladimir Gladun vvgladoun@gmail.com
  */
-public class QuestionDAO {
+public class QuestionDAOImpl {
 
     /**
      * Generate sql query string
@@ -131,7 +131,7 @@ public class QuestionDAO {
      * @return list of questions
      */
     public static ArrayList<Question> getFailedQuestions(Context context, int testType){
-        String whereClause = " INNER JOIN " + DBHandler.TABLE_MISTAKES + "te ON te." +
+        String whereClause = " INNER JOIN " + DBHandler.TABLE_MISTAKES + " te ON te." +
                 DBHandler.COLUMN_ID + " = tq." + DBHandler.COLUMN_ID +
                 " WHERE tq." + DBHandler.COLUMN_TEST + " = " + testType;
         return getQuestions(context, whereClause, "");
@@ -143,7 +143,7 @@ public class QuestionDAO {
      *
      * @param questionID - question's id in the database
      */
-    public static void AddMistake(Context context, int questionID) {
+    public static void addMistake(Context context, int questionID) {
         DBHandler dbHandler = new DBHandler(context);
         SQLiteDatabase db = dbHandler.getWritableDatabase();
 
@@ -157,12 +157,14 @@ public class QuestionDAO {
         db.close();
     }
 
+
+
     /**
      * Remove question from mistake table
      *
      * @param questionID - question's id in the database
      */
-    public static void RemoveMistake(Context context, int questionID) {
+    public static void removeMistake(Context context, int questionID) {
         DBHandler dbHandler = new DBHandler(context);
         SQLiteDatabase db = dbHandler.getWritableDatabase();
 
@@ -172,6 +174,20 @@ public class QuestionDAO {
         //insert into db (if id is already there - ignore)
         db.delete(DBHandler.TABLE_MISTAKES, whereClause, whereArgs);
 
+        //close connection
+        db.close();
+    }
+
+    /**
+     * Remove all questions from mistake table
+     */
+    public static void removeAllMistakes(Context context) {
+        DBHandler dbHandler = new DBHandler(context);
+        SQLiteDatabase db = dbHandler.getWritableDatabase();
+        // delete all
+        db.execSQL("delete from " + DBHandler.TABLE_MISTAKES);
+        // free allocated space
+        db.execSQL("vacuum");
         //close connection
         db.close();
     }

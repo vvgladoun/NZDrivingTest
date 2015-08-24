@@ -3,7 +3,6 @@ package gladun.vladimir.nzdrivingtest;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
@@ -56,7 +55,7 @@ public class QuestionFragment extends Fragment {
         View fragment_view = inflater.inflate(R.layout.fragment_question, container, false);
 
         if (mQuestion != null) {
-            ((TextView)fragment_view.findViewById(R.id.question_text))
+            ((TextView) fragment_view.findViewById(R.id.question_text))
                     .setText(mQuestion.getQuestionText());
             // SHOW IMAGE IF NEEDED
             String questionImageName = mQuestion.getImageName();
@@ -79,8 +78,15 @@ public class QuestionFragment extends Fragment {
         // Material design floating button to go to the next question
         mNextButton = (FloatingActionButton) fragment_view.findViewById(R.id.next_question_button);
         mNextButton.setColorFilter(Color.WHITE);
-        //mNextButton.setActivated(false);
-        mNextButton.setVisibility(View.GONE);
+        int btnNextVisibility = View.GONE;
+        if (mAnswers != null) {
+            for (boolean mAnswer : mAnswers) {
+                if (mAnswer)
+                    btnNextVisibility = View.VISIBLE;
+            }
+        }
+        mNextButton.setVisibility(btnNextVisibility);
+
         mNextButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -91,7 +97,7 @@ public class QuestionFragment extends Fragment {
                     boolean isCorrect = Answer.checkAnswers(mQuestion.getAnswers(), mAnswers);
                     if (!isCorrect) {
                         //if not - save the mistake for review
-                        (new SaveMistakenQuestion()).execute();
+                        (new SaveMistakenQuestion()).start();
                     }
                     // if needed, show right answer
                     if (mShowAnswer) {
@@ -99,9 +105,10 @@ public class QuestionFragment extends Fragment {
                         DialogFragment answerDialog = AnswerDialogFragment
                                 .newInstance(isCorrect, mQuestion.getExplanation(), mQuestion.getExplanationImage());
                         answerDialog.show(getFragmentManager(), "ANSWER");
+                    } else {
+                        // put fragment of the next question (or results)
+                        qa.startNextQuestion(isCorrect);
                     }
-                    // put fragment of the next question (or results)
-                    qa.startNextQuestion(isCorrect);
                 }
             }
         });
@@ -114,7 +121,7 @@ public class QuestionFragment extends Fragment {
      *
      * @param fragment_view - current fragment's view
      */
-    private void addAnswerCheckBoxes(View fragment_view){
+    private void addAnswerCheckBoxes(View fragment_view) {
         // get answers
         ArrayList<Answer> answers = mQuestion.getAnswers();
         final int aCount = answers.size();
@@ -122,7 +129,7 @@ public class QuestionFragment extends Fragment {
             mAnswers = new boolean[aCount];
         }
         // get container for new views
-        final LinearLayout answerContainer = (LinearLayout)fragment_view
+        final LinearLayout answerContainer = (LinearLayout) fragment_view
                 .findViewById(R.id.answers_check_boxes);
 
         CompoundButton.OnCheckedChangeListener answerListener = new CompoundButton.OnCheckedChangeListener() {
@@ -168,7 +175,7 @@ public class QuestionFragment extends Fragment {
      *
      * @param fragment_view - current fragment's view
      */
-    private void addAnswerRadioButtons(View fragment_view){
+    private void addAnswerRadioButtons(View fragment_view) {
         // get answers
         ArrayList<Answer> answers = mQuestion.getAnswers();
         final int aCount = answers.size();
@@ -176,7 +183,7 @@ public class QuestionFragment extends Fragment {
             mAnswers = new boolean[aCount];
         }
         //add radio buttons to rb group
-        RadioGroup answerContainer = (RadioGroup)fragment_view
+        RadioGroup answerContainer = (RadioGroup) fragment_view
                 .findViewById(R.id.answers_radio_group);
 
         RadioGroup.OnCheckedChangeListener answerListener = new RadioGroup.OnCheckedChangeListener() {
@@ -206,7 +213,7 @@ public class QuestionFragment extends Fragment {
         //retain checked
         for (int i = 0; i < aCount; i++) {
             if (mAnswers[i]) {
-                ((RadioButton)answerContainer.getChildAt(i)).setChecked(true);
+                ((RadioButton) answerContainer.getChildAt(i)).setChecked(true);
             }
         }
     }
@@ -223,7 +230,7 @@ public class QuestionFragment extends Fragment {
 
         //get question from activity
         if (mQuestion == null && (getActivity() instanceof QuestionCallbacks)) {
-            QuestionCallbacks qa = (QuestionCallbacks)getActivity();
+            QuestionCallbacks qa = (QuestionCallbacks) getActivity();
             mQuestion = qa.getQuestion();
         }
     }
@@ -235,16 +242,16 @@ public class QuestionFragment extends Fragment {
 
 
     /**
-     * Async task to save the id
+     * Thread to save the id
      * of question where mistake was made
      *
      * works with database in the background
      */
-    private class SaveMistakenQuestion extends AsyncTask<Void, Void, Void> {
+    private class SaveMistakenQuestion extends Thread {
+
         @Override
-        protected Void doInBackground(Void... arg0) {
-            QuestionDAO.AddMistake(getActivity() ,mQuestion.getId());
-            return null;
+        public void run() {
+            QuestionDAOImpl.addMistake(getActivity(), mQuestion.getId());
         }
     }
 }

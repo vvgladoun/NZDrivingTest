@@ -22,30 +22,28 @@ public class MenuCarFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        getActivity().setTitle("Car test");
+
         // get main menu fragment layout
         View fragment_view = inflater.inflate(R.layout.fragment_menu_car, container, false);
 
         // get buttons from activity's layout
         Button btnMenuCarQuestions = (Button) fragment_view.findViewById(R.id.btn_menu_car_questions);
         Button btnMenuCarTest = (Button) fragment_view.findViewById(R.id.btn_menu_car_test);
-        Button btnMenuCarStatistics = (Button) fragment_view.findViewById(R.id.btn_menu_car_statistics);
         Button btnMenuCarReview = (Button) fragment_view.findViewById(R.id.btn_menu_car_review);
 
         // set icon color
         int color = getResources().getColor(R.color.icon_grey);
         ImageView ivQuestions = (ImageView)fragment_view.findViewById(R.id.iv_car_question);
         ImageView ivTest = (ImageView)fragment_view.findViewById(R.id.iv_car_test);
-        ImageView ivStat = (ImageView)fragment_view.findViewById(R.id.iv_car_statistics);
         ImageView ivReview = (ImageView)fragment_view.findViewById(R.id.iv_car_review);
         ivQuestions.setColorFilter(color);
         ivTest.setColorFilter(color);
-        ivStat.setColorFilter(color);
         ivReview.setColorFilter(color);
 
         // set implemented method onClick as the onClickListener
         btnMenuCarQuestions.setOnClickListener(this);
         btnMenuCarTest.setOnClickListener(this);
-        btnMenuCarStatistics.setOnClickListener(this);
         btnMenuCarReview.setOnClickListener(this);
 
         return fragment_view;
@@ -66,12 +64,7 @@ public class MenuCarFragment extends Fragment implements View.OnClickListener{
                 testActivity.putExtra(TestActivity.EXTRA_TEST_TYPE, Question.CAR_TEST);
                 v.getContext().startActivity(testActivity);
                 break;
-            case R.id.btn_menu_car_statistics:
-                // show statistics by groups (car/bike):
-                //  bar for finished tests
-                //  bar for answered questions
 
-                break;
             case R.id.btn_menu_car_review:
                 // start question activity with array list of questions
                 // from mistake table

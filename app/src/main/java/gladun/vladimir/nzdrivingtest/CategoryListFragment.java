@@ -1,11 +1,8 @@
 package gladun.vladimir.nzdrivingtest;
 
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +12,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 
 /**
@@ -87,7 +83,7 @@ public class CategoryListFragment extends ListFragment{
 
         @Override
         protected Void doInBackground(Void... arg0) {
-            mCategories = CategoryDAO.getAllCategories(getActivity(), mTestType);
+            mCategories = CategoryDAOImpl.getAllCategories(getActivity(), mTestType);
             //add default element - all categories
             mCategories.add(0,new Category(0, "ALL CATEGORIES", mTestType));
             return null;

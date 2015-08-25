@@ -5,7 +5,7 @@ package gladun.vladimir.nzdrivingtest;
  *
  * @author vvgladoun@gmail.com
  */
-public class FormatHelper {
+public final class FormatHelper {
 
     public static String getTimeString(long milliseconds){
         // get string for minutes

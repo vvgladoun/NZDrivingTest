@@ -17,7 +17,7 @@ import android.widget.TextView;
  *
  * @author Vladimir Gladun vvgladoun@gmail.com
  */
-public class StatisticsFragment extends Fragment implements View.OnClickListener{
+public final class StatisticsFragment extends Fragment implements View.OnClickListener{
 
     private View mFragmentView;
 
@@ -94,12 +94,6 @@ public class StatisticsFragment extends Fragment implements View.OnClickListener
         // get shared preferences file by file key
         SharedPreferences sharedPref = context.getSharedPreferences(
                 getString(fileId), Context.MODE_PRIVATE);
-
-//        // get previous statistics
-//        int questions = sharedPref.getInt(getString(R.string.saved_questions_count), 0);
-//        int mistakes = sharedPref.getInt(getString(R.string.saved_mistakes_count), 0);
-//        int score = sharedPref.getInt(getString(R.string.saved_average_score), 0);
-//        long avgMilliseconds = sharedPref.getLong(getString(R.string.saved_average_time), 0);
 
         // clear statistics
         SharedPreferences.Editor editor = sharedPref.edit();

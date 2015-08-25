@@ -13,7 +13,7 @@ import java.util.Collections;
  *
  * @author Vladimir Gladun vvgladoun@gmail.com
  */
-public class QuestionDAOImpl {
+public final class QuestionDAOImpl {
 
     /**
      * Generate sql query string
@@ -22,7 +22,7 @@ public class QuestionDAOImpl {
      * @param postFilter - clause after order statement
      * @return string of query
      */
-    private static String getQuestionQuery(String questionFilter, String postFilter) {
+    static String getQuestionQuery(String questionFilter, String postFilter) {
         return "SELECT tq." + DBHandler.COLUMN_ID +
                 ", tq." + DBHandler.COLUMN_QUESTION +
                 ", tq." + DBHandler.COLUMN_TEST +
@@ -45,7 +45,7 @@ public class QuestionDAOImpl {
                 postFilter;
     }
 
-    public static ArrayList<Question> getQuestions(Context context, String whereClause, String postFilter) {
+    static ArrayList<Question> getQuestions(Context context, String whereClause, String postFilter) {
         // open connection to the database
         DBHandler dbHandler = new DBHandler(context);
         SQLiteDatabase db = dbHandler.getWritableDatabase();
@@ -94,6 +94,7 @@ public class QuestionDAOImpl {
         //close connection
         cursor.close();
         db.close();
+        dbHandler.close();
 
         return questions;
     }
@@ -105,7 +106,7 @@ public class QuestionDAOImpl {
      * @param testType - car test, motorbike test, etc.
      * @return list of questions
      */
-    public static ArrayList<Question> getAllQuestions(Context context, int testType) {
+    static ArrayList<Question> getAllQuestions(Context context, int testType) {
         String whereClause = " WHERE tq." + DBHandler.COLUMN_TEST + " = " + testType;
         return getQuestions(context, whereClause, "");
     }
@@ -117,7 +118,7 @@ public class QuestionDAOImpl {
      * @param testType - car test, motorbike test, etc.
      * @return list of questions
      */
-    public static ArrayList<Question> getQuestionsByCategory(Context context, int testType, int categoryId){
+    static ArrayList<Question> getQuestionsByCategory(Context context, int testType, int categoryId){
         String whereClause = " WHERE tq." + DBHandler.COLUMN_TEST + " = " + testType +
                 " AND tq." + DBHandler.COLUMN_CATEGORY_FK + " = " + categoryId;
         return getQuestions(context, whereClause, "");
@@ -130,7 +131,7 @@ public class QuestionDAOImpl {
      * @param testType - car test, motorbike test, etc.
      * @return list of questions
      */
-    public static ArrayList<Question> getFailedQuestions(Context context, int testType){
+    static ArrayList<Question> getFailedQuestions(Context context, int testType){
         String whereClause = " INNER JOIN " + DBHandler.TABLE_MISTAKES + " te ON te." +
                 DBHandler.COLUMN_ID + " = tq." + DBHandler.COLUMN_ID +
                 " WHERE tq." + DBHandler.COLUMN_TEST + " = " + testType;
@@ -143,7 +144,7 @@ public class QuestionDAOImpl {
      *
      * @param questionID - question's id in the database
      */
-    public static void addMistake(Context context, int questionID) {
+    static void addMistake(Context context, int questionID) {
         DBHandler dbHandler = new DBHandler(context);
         SQLiteDatabase db = dbHandler.getWritableDatabase();
 
@@ -155,6 +156,7 @@ public class QuestionDAOImpl {
 
         //close connection
         db.close();
+        dbHandler.close();
     }
 
 
@@ -164,7 +166,7 @@ public class QuestionDAOImpl {
      *
      * @param questionID - question's id in the database
      */
-    public static void removeMistake(Context context, int questionID) {
+    static void removeMistake(Context context, int questionID) {
         DBHandler dbHandler = new DBHandler(context);
         SQLiteDatabase db = dbHandler.getWritableDatabase();
 
@@ -176,12 +178,13 @@ public class QuestionDAOImpl {
 
         //close connection
         db.close();
+        dbHandler.close();
     }
 
     /**
      * Remove all questions from mistake table
      */
-    public static void removeAllMistakes(Context context) {
+    static void removeAllMistakes(Context context) {
         DBHandler dbHandler = new DBHandler(context);
         SQLiteDatabase db = dbHandler.getWritableDatabase();
         // delete all
@@ -190,6 +193,7 @@ public class QuestionDAOImpl {
         db.execSQL("vacuum");
         //close connection
         db.close();
+        dbHandler.close();
     }
 
 
@@ -201,7 +205,7 @@ public class QuestionDAOImpl {
      * @param questionCount - number of questions to return
      * @return list of questions
      */
-    public static ArrayList<Question> getShuffledQuestions(Context context, int testType, int questionCount){
+    static ArrayList<Question> getShuffledQuestions(Context context, int testType, int questionCount){
         ArrayList<Question> questions = getAllQuestions(context, testType);
         //shuffle result
         Collections.shuffle(questions);

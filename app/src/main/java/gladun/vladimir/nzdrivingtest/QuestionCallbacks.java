@@ -1,6 +1,5 @@
 package gladun.vladimir.nzdrivingtest;
 
-import java.util.ArrayList;
 
 /**
  * Test simulation activity class
@@ -28,7 +27,7 @@ public interface QuestionCallbacks {
      *
      * @return question object
      */
-    public Question getQuestion();
+    Question getQuestion();
 
     /**
      * Re-create current activity with default settings

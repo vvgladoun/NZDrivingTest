@@ -19,7 +19,7 @@ import java.util.ArrayList;
  *
  * @author vvgladoun@gmail.com
  */
-public class QuestionActivity extends AppCompatActivity implements QuestionCallbacks{
+public final class QuestionActivity extends AppCompatActivity implements QuestionCallbacks{
 
     // to pass arguments on first create
     public static final String EXTRA_TEST_TYPE = "TEST_TYPE";

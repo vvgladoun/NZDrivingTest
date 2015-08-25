@@ -13,7 +13,7 @@ import android.view.MenuItem;
  *
  * @author Vladimir Gladun vvgladoun@gmail.com
  */
-public class MainActivity extends AppCompatActivity {
+public final class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
      * Find action bar in a fragment and add up navigation
      * if fragment is not first oin stack
      */
-    public void placeUpButton(){
+     void placeUpButton(){
         int stackHeight = getFragmentManager().getBackStackEntryCount();
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
 

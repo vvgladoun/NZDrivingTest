@@ -15,7 +15,7 @@ import android.widget.TextView;
  *
  * @author vvgladoun@gmail.com
  */
-public class AboutDialogFragment extends DialogFragment{
+public final class AboutDialogFragment extends DialogFragment{
 
     @Nullable
     @Override

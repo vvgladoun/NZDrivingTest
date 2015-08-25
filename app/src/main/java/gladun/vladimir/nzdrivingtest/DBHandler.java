@@ -1,23 +1,23 @@
 package gladun.vladimir.nzdrivingtest;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.sql.SQLException;
 
 /**
  * SQLite helper class for database
  *
  * @author Vladimir Gladun vvgladoun@gmail.com
  */
-public class DBHandler extends SQLiteOpenHelper {
+public final class DBHandler extends SQLiteOpenHelper {
 
     private static final String TAG = DBHandler.class.getName();
     // DB version (used on upgrade)
@@ -33,7 +33,6 @@ public class DBHandler extends SQLiteOpenHelper {
     public static final String TABLE_CATEGORY = "category";
     public static final String TABLE_QUESTION = "question";
     public static final String TABLE_ANSWER = "answer";
-    public static final String TABLE_STATISTICS = "statistics";
     public static final String TABLE_MISTAKES = "mistake";
 
     // columns names
@@ -56,6 +55,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public static final String COLUMN_CORRECT = "is_correct";
 
 
+    @SuppressLint("SdCardPath")
     public DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
 
@@ -142,6 +142,8 @@ public class DBHandler extends SQLiteOpenHelper {
         super.close();
     }
 
+
+
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -150,12 +152,17 @@ public class DBHandler extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // close and delete database
-        if(mDataBase != null)
-            mDataBase.close();
-        mContext.deleteDatabase(DATABASE_NAME);
-        // copy new version of the database
-        onCreate(db);
-        // log info
-        Log.i(TAG,"Database was updated from ver." + oldVersion + " to ver." + newVersion);
+        try {
+            if (mDataBase != null)
+                mDataBase.close();
+            mContext.deleteDatabase(DATABASE_NAME);
+            // copy new version of the database
+            openDataBase();
+            // log info
+            Log.i(TAG, "Database was updated from ver." + oldVersion + " to ver." + newVersion);
+        } catch (SQLiteException e) {
+            Log.e(TAG, "Database update failed");
+        }
+
     }
 }

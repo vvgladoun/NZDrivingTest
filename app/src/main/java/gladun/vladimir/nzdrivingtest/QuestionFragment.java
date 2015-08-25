@@ -22,7 +22,7 @@ import java.util.ArrayList;
 /**
  * @author Vladimir Gladun vvgladoun@gmail.com
  */
-public class QuestionFragment extends Fragment {
+public final class QuestionFragment extends Fragment {
 
     public static final String EXTRA_SHOW_ANSWER = "SHOW_NUMBER";
     private Question mQuestion;
@@ -97,7 +97,7 @@ public class QuestionFragment extends Fragment {
                     boolean isCorrect = Answer.checkAnswers(mQuestion.getAnswers(), mAnswers);
                     if (!isCorrect) {
                         //if not - save the mistake for review
-                        (new SaveMistakenQuestion()).start();
+                        QuestionDAOImpl.addMistake(getActivity(), mQuestion.getId());
                     }
                     // if needed, show right answer
                     if (mShowAnswer) {
@@ -240,18 +240,4 @@ public class QuestionFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
-
-    /**
-     * Thread to save the id
-     * of question where mistake was made
-     *
-     * works with database in the background
-     */
-    private class SaveMistakenQuestion extends Thread {
-
-        @Override
-        public void run() {
-            QuestionDAOImpl.addMistake(getActivity(), mQuestion.getId());
-        }
-    }
 }

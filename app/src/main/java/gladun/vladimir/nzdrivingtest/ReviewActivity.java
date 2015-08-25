@@ -22,7 +22,7 @@ import java.util.ArrayList;
  *
  * @author vvgladoun@gmail.com
  */
-public class ReviewActivity extends AppCompatActivity implements QuestionCallbacks{
+public final class ReviewActivity extends AppCompatActivity implements QuestionCallbacks{
 
     // to pass arguments on first create
     public static final String EXTRA_TEST_TYPE = "TEST_TYPE";
@@ -126,7 +126,7 @@ public class ReviewActivity extends AppCompatActivity implements QuestionCallbac
             case R.id.remove_current:
                 // remove current question from mistakes
                 if (mQuestions != null) {
-                    (new RemoveMistakenQuestion()).start();
+                    QuestionDAOImpl.removeMistake(mContext, mQuestions.get(mCurrentQuestion - 1).getId());
                     // go to the next question
                     startNextQuestion(true);
                 }
@@ -340,19 +340,5 @@ public class ReviewActivity extends AppCompatActivity implements QuestionCallbac
         setDefaultValues();
         // re-create activity
         this.recreate();
-    }
-
-    /**
-     * Thread to remove question from review list
-     * (question id will be deleted from mistake table)
-     *
-     * works with database in the background
-     */
-    private class RemoveMistakenQuestion extends Thread {
-
-        @Override
-        public void run() {
-            QuestionDAOImpl.removeMistake(mContext, mQuestions.get(mCurrentQuestion - 1).getId());
-        }
     }
 }

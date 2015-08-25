@@ -18,7 +18,7 @@ import android.widget.TextView;
  *
  * @author vvgladoun@gmail.com
  */
-public class AnswerDialogFragment extends DialogFragment{
+public final class AnswerDialogFragment extends DialogFragment{
 
     //labels for extras
     public static final String EXTRA_ANSWER_IMAGE = "ANSWER_IMAGE";
@@ -96,7 +96,12 @@ public class AnswerDialogFragment extends DialogFragment{
         tvAnswerText.setText(mAnswerText);
         //if answer has image, add it
         if (!mAnswerImage.equals("")) {
-            ImageView answerImage = (ImageView)dialog.findViewById(R.id.answer_image);
+            int resID = getResources().getIdentifier(mAnswerImage, "drawable", getActivity().getPackageName());
+            if (resID > 0) {
+                //add image if found
+                ImageView answerImage = (ImageView)dialog.findViewById(R.id.answer_image);
+                answerImage.setImageResource(resID);
+            }
         }
         //find OK button and set listener
         Button btnExit = (Button)dialog.findViewById(R.id.answer_exit_btn);

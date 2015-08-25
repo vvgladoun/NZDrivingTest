@@ -17,7 +17,7 @@ import android.widget.ImageView;
  *
  * @author Vladimir Gladun vvgladoun@gmail.com
  */
-public class MenuMainFragment extends Fragment implements View.OnClickListener {
+public final class MenuMainFragment extends Fragment implements View.OnClickListener {
 
     @Nullable
     @Override
@@ -31,12 +31,11 @@ public class MenuMainFragment extends Fragment implements View.OnClickListener {
         Button btnMainCar = (Button) fragment_view.findViewById(R.id.btn_main_car);
         Button btnMainMotorbike = (Button) fragment_view.findViewById(R.id.btn_main_motorbike);
         Button btnStatistics = (Button) fragment_view.findViewById(R.id.btn_menu_statistics);
-        Button btnContactMe = (Button) fragment_view.findViewById(R.id.btn_menu_contact_me); //TOSUBMIT
+
         // set implemented method onClick as the onClickListener
         btnMainCar.setOnClickListener(this);
         btnMainMotorbike.setOnClickListener(this);
         btnStatistics.setOnClickListener(this);
-        btnContactMe.setOnClickListener(this); //TOSUBMIT
 
         // set icon color
         int color = getResources().getColor(R.color.icon_grey);
@@ -46,11 +45,6 @@ public class MenuMainFragment extends Fragment implements View.OnClickListener {
         ivCar.setColorFilter(color);
         ivMb.setColorFilter(color);
         ivStat.setColorFilter(color);
-
-        //TOSUBMIT
-        ImageView ivContact = (ImageView)fragment_view.findViewById(R.id.iv_main_contact_me);
-        ivContact.setColorFilter(color);
-
 
         return fragment_view;
     }
@@ -71,11 +65,6 @@ public class MenuMainFragment extends Fragment implements View.OnClickListener {
             case R.id.btn_menu_statistics:
                 // show statistics by groups (car/bike):
                 startFragment(new StatisticsFragment());
-                break;
-            //TOSUBMIT
-            case R.id.btn_menu_contact_me:
-                // show statistics by groups (car/bike):
-                startFragment(new SendMessagesFragment());
                 break;
         }
     }

@@ -2,7 +2,6 @@ package gladun.vladimir.nzdrivingtest;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -11,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author Vladimir Gladun vvgladoun@gmail.com
  */
-public class Answer implements Parcelable {
+final class Answer implements Parcelable {
 
     private int id;
     private String answerText;
@@ -30,7 +29,7 @@ public class Answer implements Parcelable {
         this.isCorrect = isCorrect;
     }
 
-    protected Answer(Parcel in) {
+    public Answer(Parcel in) {
         id = in.readInt();
         answerText = in.readString();
         isCorrect = (in.readByte() == 1);
@@ -52,7 +51,7 @@ public class Answer implements Parcelable {
      *
      * @return text of answer
      */
-    public String getAnswerText() {
+    String getAnswerText() {
         return answerText;
     }
 
@@ -60,28 +59,21 @@ public class Answer implements Parcelable {
      *
      * @return id in the db
      */
-    public int getId() {
+    int getId() {
         return id;
     }
 
-    /**
-     *
-     * @return true if correct
-     */
-    public boolean isCorrect() {
-        return isCorrect;
-    }
 
     /**
      * Static method to change user's answers
      *
      * answers in user's array list(selected/unselected answers)
      * must be in the same order as answers in question's array list
-     * @param questionAnswers
-     * @param userAnswers
-     * @return
+     * @param questionAnswers - question answers' array list
+     * @param userAnswers - boolean array of user answers (with same order)
+     * @return true if user's answer is correct
      */
-    public static boolean checkAnswers(ArrayList<Answer> questionAnswers,
+    static boolean checkAnswers(ArrayList<Answer> questionAnswers,
                                        boolean[] userAnswers){
 
         for (int i = 0; i < questionAnswers.size(); i++) {

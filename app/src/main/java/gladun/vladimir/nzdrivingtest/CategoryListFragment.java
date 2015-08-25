@@ -19,7 +19,7 @@ import java.util.ArrayList;
  *
  * @author Vladimir Gladun vvgladoun@gmail.com
  */
-public class CategoryListFragment extends ListFragment{
+public final class CategoryListFragment extends ListFragment{
 
     public static final String EXTRA_TEST_TYPE = "TEST_TYPE";
     private ArrayList<Category> mCategories;
@@ -70,7 +70,7 @@ public class CategoryListFragment extends ListFragment{
         // create new question activity with selected category
         Intent questionActivity = new Intent(v.getContext(), QuestionActivity.class);
         questionActivity.putExtra(QuestionActivity.EXTRA_TEST_TYPE, mTestType);
-        int categoryId = ((Category)mCategoryAdapter.getItem(position)).getId();
+        int categoryId = mCategoryAdapter.getItem(position).getId();
         questionActivity.putExtra(QuestionActivity.EXTRA_CATEGORY, categoryId);
         v.getContext().startActivity(questionActivity);
     }

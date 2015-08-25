@@ -16,7 +16,7 @@ import android.widget.ImageView;
  *
  * @author Vladimir Gladun vvgladoun@gmail.com
  */
-public class MenuMotorbikeFragment extends Fragment implements View.OnClickListener{
+public final class MenuMotorbikeFragment extends Fragment implements View.OnClickListener{
 
     @Nullable
     @Override

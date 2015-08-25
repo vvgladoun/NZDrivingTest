@@ -5,7 +5,7 @@ package gladun.vladimir.nzdrivingtest;
  *
  * @author Vladimir Gladun vvgladoun@gmail.com
  */
-public class Category {
+final class Category {
     private int id;
     private String name;
     private int test_id;

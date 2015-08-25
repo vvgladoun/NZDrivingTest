@@ -15,7 +15,7 @@ import android.widget.TextView;
  *
  * @author vvgladoun@gmail.com
  */
-public class QuitDialogFragment extends DialogFragment implements View.OnClickListener{
+public final class QuitDialogFragment extends DialogFragment implements View.OnClickListener{
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author Vladimir Gladun vvgladoun@gmail.com
  */
-public class Question implements Parcelable{
+public final class Question implements Parcelable{
 
     private int id;
     private String questionText;

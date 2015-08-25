@@ -16,7 +16,7 @@ import android.widget.TextView;
  *
  * @author vvgladoun@gmail.com
  */
-public class ResultDialogFragment extends DialogFragment implements View.OnClickListener {
+public final class ResultDialogFragment extends DialogFragment implements View.OnClickListener {
 
     //labels for extras
     public static final String EXTRA_MISTAKES = "MISTAKES";

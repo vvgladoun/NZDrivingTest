@@ -24,7 +24,7 @@ import java.util.ArrayList;
  *
  * @author Vladimir Gladun vvgladoun@gmail.com
  */
-public class TestActivity extends AppCompatActivity implements QuestionCallbacks{
+public final class TestActivity extends AppCompatActivity implements QuestionCallbacks{
 
     // exam duration in milliseconds
     private static final long TEST_DURATION = 1800000;

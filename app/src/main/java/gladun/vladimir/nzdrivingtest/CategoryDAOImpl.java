@@ -12,24 +12,24 @@ import java.util.ArrayList;
  *
  * @author Vladimir Gladun vvgladoun@gmail.com
  */
-public class CategoryDAOImpl {
+final class CategoryDAOImpl {
 
     /**
      * get all categories for test type
      *
-     * @param context - app context
+     * @param context  - app context
      * @param testType - car test, motorbike test, etc.
      * @return list of questions
      */
-    public static ArrayList<Category> getAllCategories(Context context, int testType) {
+    static ArrayList<Category> getAllCategories(Context context, int testType) {
         // open connection to the database
         DBHandler dbHandler = new DBHandler(context);
         SQLiteDatabase db = dbHandler.getWritableDatabase();
         // create empty array list for categories
         ArrayList<Category> categories = new ArrayList<>();
         Cursor cursor = db.query(DBHandler.TABLE_CATEGORY,
-                new String[] { DBHandler.COLUMN_ID, DBHandler.COLUMN_CATEGORY_NAME, DBHandler.COLUMN_TEST },
-                DBHandler.COLUMN_TEST + " = ?", new String[] {"" + testType},
+                new String[]{DBHandler.COLUMN_ID, DBHandler.COLUMN_CATEGORY_NAME, DBHandler.COLUMN_TEST},
+                DBHandler.COLUMN_TEST + " = ?", new String[]{"" + testType},
                 null, null, DBHandler.COLUMN_ID);
         Log.d("SQL", "EXECUTED!");
         // loop through the results
@@ -49,7 +49,7 @@ public class CategoryDAOImpl {
         //close connection
         cursor.close();
         db.close();
-
+        dbHandler.close();
         return categories;
     }
 }

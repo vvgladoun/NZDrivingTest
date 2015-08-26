@@ -21,7 +21,7 @@ public final class DBHandler extends SQLiteOpenHelper {
 
     private static final String TAG = DBHandler.class.getName();
     // DB version (used on upgrade)
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // Database Name
     private static final String DATABASE_NAME = "nzdrivingtest.db";
@@ -129,6 +129,7 @@ public final class DBHandler extends SQLiteOpenHelper {
         if (mDataBase == null) {
             mDataBase = SQLiteDatabase.openDatabase(mPath, null, SQLiteDatabase.OPEN_READWRITE);
         }
+
         return mDataBase.isOpen();
     }
 

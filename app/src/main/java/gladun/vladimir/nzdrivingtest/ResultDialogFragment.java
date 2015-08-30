@@ -126,11 +126,21 @@ public final class ResultDialogFragment extends DialogFragment implements View.O
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
         Dialog dialog = super.onCreateDialog(savedInstanceState);
+
         //remove the default title
         TextView title = (TextView)dialog.findViewById(android.R.id.title);
         title.setVisibility(View.GONE);
 
         return dialog;
+    }
+
+    @Override
+    public void onResume() {
+        //change the size of the dialog
+//        int width = getResources().getDimensionPixelSize(R.dimen.popup_width);
+//        int height = getResources().getDimensionPixelSize(R.dimen.popup_height);
+//        getDialog().getWindow().setLayout(width, height);
+        super.onResume();
     }
 
     @Override

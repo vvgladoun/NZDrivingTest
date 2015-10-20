@@ -41,6 +41,7 @@ public final class QuitDialogFragment extends DialogFragment implements View.OnC
 
     }
 
+    /*
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
@@ -49,7 +50,7 @@ public final class QuitDialogFragment extends DialogFragment implements View.OnC
         title.setVisibility(View.GONE);
 
         return dialog;
-    }
+    } */
 
     @Override
     public void onClick(View v) {

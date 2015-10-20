@@ -122,7 +122,7 @@ public final class ResultDialogFragment extends DialogFragment implements View.O
         return dialog;
     }
 
-    @NonNull
+   /*
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
         Dialog dialog = super.onCreateDialog(savedInstanceState);
@@ -132,7 +132,7 @@ public final class ResultDialogFragment extends DialogFragment implements View.O
         title.setVisibility(View.GONE);
 
         return dialog;
-    }
+    } */
 
     @Override
     public void onResume() {

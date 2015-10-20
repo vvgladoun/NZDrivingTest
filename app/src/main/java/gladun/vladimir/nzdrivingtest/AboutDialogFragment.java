@@ -1,9 +1,9 @@
 package gladun.vladimir.nzdrivingtest;
 
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.app.DialogFragment;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +29,7 @@ public final class AboutDialogFragment extends DialogFragment{
         return fragmentView;
     }
 
+    /*
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
@@ -37,5 +38,5 @@ public final class AboutDialogFragment extends DialogFragment{
         title.setVisibility(View.GONE);
 
         return dialog;
-    }
+    } */
 }

@@ -33,8 +33,6 @@ public final class AnswerDialogFragment extends DialogFragment{
     // flag - answer is correct or not
     private boolean mCorrect;
 
-    //TODO: new instance method with answer text and is_correct flag
-
 
     /**
      * Fragment constructor
@@ -116,6 +114,7 @@ public final class AnswerDialogFragment extends DialogFragment{
         return dialog;
     }
 
+    /*
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState){
@@ -125,7 +124,7 @@ public final class AnswerDialogFragment extends DialogFragment{
         title.setVisibility(View.GONE);
 
         return dialog;
-    }
+    } */
 
     @Override
     public void onDismiss(DialogInterface dialog) {

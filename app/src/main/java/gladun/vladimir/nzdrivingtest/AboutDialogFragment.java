@@ -29,14 +29,4 @@ public final class AboutDialogFragment extends DialogFragment{
         return fragmentView;
     }
 
-    /*
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Dialog dialog = super.onCreateDialog(savedInstanceState);
-        //remove the default title
-        TextView title = (TextView)dialog.findViewById(android.R.id.title);
-        title.setVisibility(View.GONE);
-
-        return dialog;
-    } */
 }

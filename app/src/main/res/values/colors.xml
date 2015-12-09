@@ -24,4 +24,5 @@
     <color name="text_green">#6fdf8e</color>
     <!-- main menu grey color -->
     <color name="icon_grey">#929493</color>
+    <color name="black">#ed1f1f</color>
 </resources>
